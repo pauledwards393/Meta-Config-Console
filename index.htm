@@ -1,0 +1,72 @@
+<html>
+<head>
+	<title>Meta Configuration Console</title>
+	<link rel="stylesheet" type="text/css" href="/public/main.css" />
+</head>
+<body ng-app="metaConfigConsole" ng-controller="HomeController">
+
+	<div class="row">
+
+		<div class="small-6 columns">
+
+			<h2>Node.js</h2>
+
+			<a href="" class="button small" ng-click="runNodejsTests()">Run tests</a>
+
+			<h3>Test 1: Count of all advertisers</h3>
+
+			<p>
+				<span class="label">Advertiser count</span>
+				{{ nodejs.tests[0].value }}
+			</p>
+			<p>
+				<span class="label">Test duration</span>
+				{{ nodejs.tests[0].duration() | number: 2 }}
+			</p>
+
+			<h3>Test 2: Advertisers with 'Florida'</h3>
+
+			<table>
+				<thead>
+					<th width="50%">Id</th>
+					<th width="50%">Name</th>
+				</thead>
+				<tbody>
+					<tr ng-repeat="advertiser in nodejs.tests[1].value">
+						<td>{{ advertiser.id }}</td>
+						<td>{{ advertiser.name }}</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<p>
+				<span class="label">Test duration</span>
+				{{ nodejs.tests[1].duration() | number: 2 }}
+			</p>
+
+			<h3>Overall</h3>
+			<p>
+				<span class="label">Overall duration</span>
+				{{ nodejs.duration | number: 2 }}
+			</p>
+
+		</div>
+
+		<div class="small-6 columns">
+
+			<h2>C#</h2>
+
+			<a href="" class="button small">Run tests</a>
+
+		</div>
+
+	</div>
+
+	<script src="/public/main.js"></script>
+	<!-- inject:js -->
+  	<script src="/app/app.module.js"></script>
+  	<script src="/app/components/home/advertiserFactory.js"></script>
+  	<script src="/app/components/home/homeController.js"></script>
+  	<!-- endinject -->
+</body>
+</html>
