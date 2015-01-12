@@ -3,6 +3,19 @@ body {
 	padding-top: 1em;
 }
 
+h3 {
+	border-top: solid 1px #ddd;
+	padding-top: 0.8em;
+}
+
+table {
+	width: 100%;
+
+	th {
+		width: 50%;
+	}
+}
+
 .columns {
 	min-height: 95%;
 	background: #fff;

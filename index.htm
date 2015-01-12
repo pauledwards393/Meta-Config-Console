@@ -13,7 +13,7 @@
 
 			<a href="" class="button small" ng-click="runNodejsTests()">Run tests</a>
 
-			<h3>Test 1: Count of all advertisers</h3>
+			<h3>Test 1: <small>Count of all advertisers</small></h3>
 
 			<p>
 				<span class="label">Advertiser count</span>
@@ -24,12 +24,12 @@
 				{{ nodejs.tests[0].duration() | number: 2 }}
 			</p>
 
-			<h3>Test 2: Advertisers with 'Florida'</h3>
+			<h3>Test 2: <small>Advertisers with 'Florida' inventories</small></h3>
 
 			<table>
 				<thead>
-					<th width="50%">Id</th>
-					<th width="50%">Name</th>
+					<th>Id</th>
+					<th>Name</th>
 				</thead>
 				<tbody>
 					<tr ng-repeat="advertiser in nodejs.tests[1].value">
@@ -44,10 +44,30 @@
 				{{ nodejs.tests[1].duration() | number: 2 }}
 			</p>
 
+			<h3>Test 3: <small>Every 50th advertiser with brand names</small></h3>
+
+			<table>
+				<thead>
+					<th>Advertiser</th>
+					<th>Brand</th>
+				</thead>
+				<tbody>
+					<tr ng-repeat="advertiser in nodejs.tests[2].value">
+						<td>{{ advertiser.advertiser }}</td>
+						<td>{{ advertiser.brand }}</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<p>
+				<span class="label">Test duration</span>
+				{{ nodejs.tests[2].duration() | number: 2 }}
+			</p>
+
 			<h3>Overall</h3>
 			<p>
 				<span class="label">Overall duration</span>
-				{{ nodejs.duration | number: 2 }}
+				{{ nodejs.duration.duration() | number: 2 }}
 			</p>
 
 		</div>

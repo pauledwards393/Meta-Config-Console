@@ -20,7 +20,7 @@ angular
 
 			return (this.endTime - this.startTime) / 1000;
 		};
-
+		
 		$scope.runNodejsTests = function() {
 
 			$scope.nodejs = { tests: [] };
@@ -51,11 +51,29 @@ angular
 
 							$scope.nodejs.tests.push(test2);
 
-							// Overall duration of tests
-							$scope.nodejs.duration = $scope.nodejs.tests.reduce(function(a, b) {
-								return a.duration() + b.duration();
-							});
+							// Test 3
+							var test3 = new test(performance.now());
 
+							advertiserFactory
+								.nodejs
+								.getNthAdvertisersWithBrand()
+								.success(function(result) {
+
+									test3.value = result;
+									test3.endTime = performance.now();
+
+									$scope.nodejs.tests.push(test3);
+
+									// Overall duration of tests
+									$scope.nodejs.duration = $scope.nodejs.tests.reduce(function(a, b) {
+										return {
+											duration: function() {
+												return a.duration() + b.duration();
+											}
+										};
+									});
+								})
+								.error(handleError);
 						})
 						.error(handleError);
 				})
