@@ -13,62 +13,70 @@
 
 			<a href="" class="button small" ng-click="runNodejsTests()">Run tests</a>
 
-			<h3>Test 1: <small>Count of all advertisers</small></h3>
+			<section>
+				<h3>Test 1: <small>Count of all advertisers</small></h3>
 
-			<p>
-				<span class="label">Advertiser count</span>
-				{{ nodejs.tests[0].value }}
-			</p>
-			<p>
-				<span class="label">Test duration</span>
-				{{ nodejs.tests[0].duration() | number: 2 }}
-			</p>
+				<p>
+					<span class="label">Advertiser count</span>
+					{{ nodejs.tests[0].value }}
+				</p>
+				<p>
+					<span class="label">Test duration (s)</span>
+					{{ nodejs.tests[0].duration | number: 2 }}
+				</p>
+			</section>
 
-			<h3>Test 2: <small>Advertisers with 'Florida' inventories</small></h3>
+			<section>
+				<h3>Test 2: <small>Advertisers with 'Florida' inventories</small></h3>
 
-			<table>
-				<thead>
-					<th>Id</th>
-					<th>Name</th>
-				</thead>
-				<tbody>
-					<tr ng-repeat="advertiser in nodejs.tests[1].value">
-						<td>{{ advertiser.id }}</td>
-						<td>{{ advertiser.name }}</td>
-					</tr>
-				</tbody>
-			</table>
+				<table>
+					<thead>
+						<th>Id</th>
+						<th>Name</th>
+					</thead>
+					<tbody>
+						<tr ng-repeat="advertiser in nodejs.tests[1].value">
+							<td>{{ advertiser.id }}</td>
+							<td>{{ advertiser.name }}</td>
+						</tr>
+					</tbody>
+				</table>
 
-			<p>
-				<span class="label">Test duration</span>
-				{{ nodejs.tests[1].duration() | number: 2 }}
-			</p>
+				<p>
+					<span class="label">Test duration (s)</span>
+					{{ nodejs.tests[1].duration | number: 2 }}
+				</p>
+			</section>
 
-			<h3>Test 3: <small>Every 50th advertiser with brand names</small></h3>
+			<section>
+				<h3>Test 3: <small>Every 50th advertiser with brand names</small></h3>
 
-			<table>
-				<thead>
-					<th>Advertiser</th>
-					<th>Brand</th>
-				</thead>
-				<tbody>
-					<tr ng-repeat="advertiser in nodejs.tests[2].value">
-						<td>{{ advertiser.advertiser }}</td>
-						<td>{{ advertiser.brand }}</td>
-					</tr>
-				</tbody>
-			</table>
+				<table>
+					<thead>
+						<th>Advertiser</th>
+						<th>Brand</th>
+					</thead>
+					<tbody>
+						<tr ng-repeat="advertiser in nodejs.tests[2].value">
+							<td>{{ advertiser.advertiser }}</td>
+							<td>{{ advertiser.brand }}</td>
+						</tr>
+					</tbody>
+				</table>
 
-			<p>
-				<span class="label">Test duration</span>
-				{{ nodejs.tests[2].duration() | number: 2 }}
-			</p>
+				<p>
+					<span class="label">Test duration (s)</span>
+					{{ nodejs.tests[2].duration | number: 2 }}
+				</p>
+			</section>
 
-			<h3>Overall</h3>
-			<p>
-				<span class="label">Overall duration</span>
-				{{ nodejs.duration.duration() | number: 2 }}
-			</p>
+			<section>
+				<h3>Overall</h3>
+				<p>
+					<span class="label">Overall duration (s)</span>
+					{{ nodejs.duration.duration | number: 2 }}
+				</p>
+			</section>
 
 		</div>
 

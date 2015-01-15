@@ -3,81 +3,76 @@ angular
 	.module('metaConfigConsole')
 	.controller('HomeController', ['$scope', 'advertiserFactory', function($scope, advertiserFactory) {
 
-		$scope.nodejs = {};
+		$scope.nodejs = $scope.csharp = {};
 
-		var handleError = function(error) {
-			console.log(error);
+		var TestCollection = function(apiCalls) {
+
+			var self = this;
+
+			self.tests = [];
+
+			var init = function() {
+				apiCalls.forEach(function(element) {
+					self.tests.push({ api: element });
+				});
+			}
+
+			init();
 		};
 
-		var test = function(startTime) {
-			this.startTime = startTime;
-			this.endTime = startTime;
-		}
+		TestCollection.prototype = {
 
-		test.prototype.duration = function() {
-			if (this.startTime === this.endTime)
-				return;
+			runTests: function() {
 
-			return (this.endTime - this.startTime) / 1000;
-		};
-		
-		$scope.runNodejsTests = function() {
+				var self = this;
 
-			$scope.nodejs = { tests: [] };
+				if (self.tests.length === 0)
+					return;
 
-			// Test 1
-			var test1 = new test(performance.now());
+				var performTest = function(index) {
 
-			advertiserFactory
-				.nodejs
-				.getAdvertiserCount()
-				.success(function(result) {
+					var test = self.tests[index];
 
-					test1.value = result;
-					test1.endTime = performance.now();
+					test.startTime = performance.now();
 
-					$scope.nodejs.tests.push(test1);
-
-					// Test 2
-					var test2 = new test(performance.now());
-
-					advertiserFactory
-						.nodejs
-						.getAdvertisersWithFlorida()
+					test
+						.api()
 						.success(function(result) {
 
-							test2.value = result;
-							test2.endTime = performance.now();
+							test.value = result;
+							test.endTime = performance.now();
+							test.duration = (test.endTime - test.startTime) / 1000;
 
-							$scope.nodejs.tests.push(test2);
+							index++;
 
-							// Test 3
-							var test3 = new test(performance.now());
-
-							advertiserFactory
-								.nodejs
-								.getNthAdvertisersWithBrand()
-								.success(function(result) {
-
-									test3.value = result;
-									test3.endTime = performance.now();
-
-									$scope.nodejs.tests.push(test3);
-
-									// Overall duration of tests
-									$scope.nodejs.duration = $scope.nodejs.tests.reduce(function(a, b) {
-										return {
-											duration: function() {
-												return a.duration() + b.duration();
-											}
-										};
-									});
-								})
-								.error(handleError);
+							if (index <= self.tests.length - 1)
+								performTest(index);
+							else
+								self.duration = self.tests.reduce(function(a, b) {
+									return {
+										duration: a.duration + b.duration
+									}
+								});
 						})
-						.error(handleError);
-				})
-				.error(handleError);
+						.error(function(error) {
+							console.log(error);
+						});
+					}
+
+				performTest(0);
+			}
 		};
 
+		$scope.runNodejsTests = function() {
+
+			var api = advertiserFactory.nodejs;
+
+			$scope.nodejs = new TestCollection([
+				api.getAdvertiserCount,
+				api.getAdvertisersWithFlorida,
+				api.getNthAdvertisersWithBrand
+			]);
+
+			$scope.nodejs.runTests();
+		};
 	}]);
