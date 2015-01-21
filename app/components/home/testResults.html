@@ -1,0 +1,71 @@
+<div class="small-6 columns">
+
+  <h2>{{ title }}</h2>
+  <a href="" class="button small" ng-click="fn()">Run tests</a>
+
+  <section ng-show="results.tests[0].value">
+    <h3>Test 1: <small>Count of all advertisers</small></h3>
+
+    <p>
+      <span class="label">Advertiser count</span>
+      {{ results.tests[0].value }}
+    </p>
+    <p>
+      <span class="label">Test duration (s)</span>
+      {{ results.tests[0].duration | number: 2 }}s
+    </p>
+  </section>
+
+  <section ng-show="results.tests[1].value">
+    <h3>Test 2: <small>Advertisers with 'Florida' inventories</small></h3>
+
+    <table>
+      <thead>
+        <th>Id</th>
+        <th>Name</th>
+      </thead>
+      <tbody>
+        <tr ng-repeat="advertiser in results.tests[1].value">
+          <td>{{ advertiser.id }}</td>
+          <td>{{ advertiser.name }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>
+      <span class="label">Test duration (s)</span>
+      {{ results.tests[1].duration | number: 2 }}s
+    </p>
+  </section>
+
+  <section ng-show="results.tests[2].value">
+    <h3>Test 3: <small>Every 50th advertiser with brand names</small></h3>
+
+    <table>
+      <thead>
+        <th>Advertiser</th>
+        <th>Brand</th>
+      </thead>
+      <tbody>
+        <tr ng-repeat="advertiser in results.tests[2].value">
+          <td>{{ advertiser.advertiser }}</td>
+          <td>{{ advertiser.brand }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>
+      <span class="label">Test duration (s)</span>
+      {{ results.tests[2].duration | number: 2 }}s
+    </p>
+  </section>
+
+  <section ng-show="results.duration">
+    <h3>Overall</h3>
+    <p>
+      <span class="label">Overall duration (s)</span>
+      {{ results.duration.duration | number: 2 }}s
+    </p>
+  </section>
+
+</div>

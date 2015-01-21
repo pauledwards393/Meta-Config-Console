@@ -9,12 +9,13 @@ angular
 
 			var self = this;
 
-			self.tests = [];
-
 			var init = function() {
-				apiCalls.forEach(function(element) {
-					self.tests.push({ api: element });
-				});
+				self.tests =
+					Object.keys(apiCalls).map(function(element) {
+						return {
+							api: apiCalls[element]
+						}
+					});
 			}
 
 			init();
@@ -64,15 +65,13 @@ angular
 		};
 
 		$scope.runNodejsTests = function() {
-
-			var api = advertiserFactory.nodejs;
-
-			$scope.nodejs = new TestCollection([
-				api.getAdvertiserCount,
-				api.getAdvertisersWithFlorida,
-				api.getNthAdvertisersWithBrand
-			]);
-
+			$scope.nodejs = new TestCollection(advertiserFactory.nodejs);
 			$scope.nodejs.runTests();
 		};
+
+		$scope.runCSharpTests = function() {
+			$scope.csharp = new TestCollection(advertiserFactory.csharp);
+			$scope.csharp.runTests();
+		};
+
 	}]);

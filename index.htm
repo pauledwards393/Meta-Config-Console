@@ -6,88 +6,8 @@
 <body ng-app="metaConfigConsole" ng-controller="HomeController">
 
 	<div class="row">
-
-		<div class="small-6 columns">
-
-			<h2>Node.js</h2>
-
-			<a href="" class="button small" ng-click="runNodejsTests()">Run tests</a>
-
-			<section ng-show="nodejs.tests[0].value">
-				<h3>Test 1: <small>Count of all advertisers</small></h3>
-
-				<p>
-					<span class="label">Advertiser count</span>
-					{{ nodejs.tests[0].value }}
-				</p>
-				<p>
-					<span class="label">Test duration (s)</span>
-					{{ nodejs.tests[0].duration | number: 2 }}
-				</p>
-			</section>
-
-			<section ng-show="nodejs.tests[1].value">
-				<h3>Test 2: <small>Advertisers with 'Florida' inventories</small></h3>
-
-				<table>
-					<thead>
-						<th>Id</th>
-						<th>Name</th>
-					</thead>
-					<tbody>
-						<tr ng-repeat="advertiser in nodejs.tests[1].value">
-							<td>{{ advertiser.id }}</td>
-							<td>{{ advertiser.name }}</td>
-						</tr>
-					</tbody>
-				</table>
-
-				<p>
-					<span class="label">Test duration (s)</span>
-					{{ nodejs.tests[1].duration | number: 2 }}
-				</p>
-			</section>
-
-			<section ng-show="nodejs.tests[2].value">
-				<h3>Test 3: <small>Every 50th advertiser with brand names</small></h3>
-
-				<table>
-					<thead>
-						<th>Advertiser</th>
-						<th>Brand</th>
-					</thead>
-					<tbody>
-						<tr ng-repeat="advertiser in nodejs.tests[2].value">
-							<td>{{ advertiser.advertiser }}</td>
-							<td>{{ advertiser.brand }}</td>
-						</tr>
-					</tbody>
-				</table>
-
-				<p>
-					<span class="label">Test duration (s)</span>
-					{{ nodejs.tests[2].duration | number: 2 }}
-				</p>
-			</section>
-
-			<section ng-show="nodejs.duration">
-				<h3>Overall</h3>
-				<p>
-					<span class="label">Overall duration (s)</span>
-					{{ nodejs.duration.duration | number: 2 }}
-				</p>
-			</section>
-
-		</div>
-
-		<div class="small-6 columns">
-
-			<h2>C#</h2>
-
-			<a href="" class="button small">Run tests</a>
-
-		</div>
-
+		<test-results results="nodejs" title="node.js" fn="runNodejsTests()"></test-results>
+		<test-results results="csharp" title="C#" fn="runCSharpTests()"></test-results>
 	</div>
 
 	<script src="/public/main.js"></script>
@@ -95,6 +15,7 @@
   	<script src="/app/app.module.js"></script>
   	<script src="/app/components/home/advertiserFactory.js"></script>
   	<script src="/app/components/home/homeController.js"></script>
+  	<script src="/app/components/home/testResultsDirective.js"></script>
   	<!-- endinject -->
 </body>
 </html>
