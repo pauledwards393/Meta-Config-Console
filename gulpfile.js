@@ -64,7 +64,7 @@ gulp.task('browser-sync-reload', function() {
 
 gulp.task('watch', function() {
 	gulp.watch('assets/scss/**/*.scss', ['css']);
-	gulp.watch('app/**/*.js', ['browser-sync-reload']);
+	gulp.watch('app/**/*.*', ['browser-sync-reload']);
 	gulp.watch('index.htm', ['browser-sync-reload']);
 });
 

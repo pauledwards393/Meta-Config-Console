@@ -11,8 +11,11 @@ h3 {
 table {
 	width: 100%;
 
-	th {
+	thead tr th {
 		width: 50%;
+		background-color: #008CBA;
+		color: #fff;
+		font-weight: normal;
 	}
 }
 

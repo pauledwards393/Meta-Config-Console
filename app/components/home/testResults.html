@@ -3,6 +3,24 @@
   <h2>{{ title }}</h2>
   <a href="" class="button small" ng-click="fn()">Run tests</a>
 
+  <section ng-show="results.duration.length > 0">
+    <h3>Overall</h3>
+
+    <table>
+      <thead>
+        <th>Test Iteration</th>
+        <th>Duration</th>
+      </thead>
+      <tbody>
+        <tr ng-repeat="duration in results.duration">
+          <td>{{ $index + 1 }}</td>
+          <td>{{ duration.duration | number: 2 }}s</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </section>
+
   <section ng-show="results.tests[0].value">
     <h3>Test 1: <small>Count of all advertisers</small></h3>
 
@@ -11,7 +29,7 @@
       {{ results.tests[0].value }}
     </p>
     <p>
-      <span class="label">Test duration (s)</span>
+      <span class="label">Test duration</span>
       {{ results.tests[0].duration | number: 2 }}s
     </p>
   </section>
@@ -33,7 +51,7 @@
     </table>
 
     <p>
-      <span class="label">Test duration (s)</span>
+      <span class="label">Test duration</span>
       {{ results.tests[1].duration | number: 2 }}s
     </p>
   </section>
@@ -55,16 +73,8 @@
     </table>
 
     <p>
-      <span class="label">Test duration (s)</span>
+      <span class="label">Test duration</span>
       {{ results.tests[2].duration | number: 2 }}s
-    </p>
-  </section>
-
-  <section ng-show="results.duration">
-    <h3>Overall</h3>
-    <p>
-      <span class="label">Overall duration (s)</span>
-      {{ results.duration.duration | number: 2 }}s
     </p>
   </section>
 
