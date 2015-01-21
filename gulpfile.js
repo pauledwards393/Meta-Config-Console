@@ -29,18 +29,17 @@ gulp.task('js', function() {
 
 	return target
 			.pipe(plugins.inject(js))
-			.pipe(gulp.dest('./'))
-			.pipe(reload({ stream: true }));
+			.pipe(gulp.dest('./'));
 });
 
 // CSS including all Bower CSS
 gulp.task('css', function() {
 
 	var cssFromVendors = gulp.src(plugins.mainBowerFiles())
-							.pipe(plugins.filter('*.css'));
+												.pipe(plugins.filter('*.css'));
 
-	var cssFromScss = gulp.src('assets/scss/main.scss')
-						.pipe(plugins.rubySass({style: 'compressed'}));
+	var cssFromScss = plugins
+										.rubySass('assets/scss/main.scss');
 
 	return plugins.eventStream.concat(cssFromVendors, cssFromScss)
 			.pipe(plugins.order(['normalize.css', '*']))

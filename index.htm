@@ -13,7 +13,7 @@
 
 			<a href="" class="button small" ng-click="runNodejsTests()">Run tests</a>
 
-			<section>
+			<section ng-show="nodejs.tests[0].value">
 				<h3>Test 1: <small>Count of all advertisers</small></h3>
 
 				<p>
@@ -26,7 +26,7 @@
 				</p>
 			</section>
 
-			<section>
+			<section ng-show="nodejs.tests[1].value">
 				<h3>Test 2: <small>Advertisers with 'Florida' inventories</small></h3>
 
 				<table>
@@ -48,7 +48,7 @@
 				</p>
 			</section>
 
-			<section>
+			<section ng-show="nodejs.tests[2].value">
 				<h3>Test 3: <small>Every 50th advertiser with brand names</small></h3>
 
 				<table>
@@ -70,7 +70,7 @@
 				</p>
 			</section>
 
-			<section>
+			<section ng-show="nodejs.duration">
 				<h3>Overall</h3>
 				<p>
 					<span class="label">Overall duration (s)</span>

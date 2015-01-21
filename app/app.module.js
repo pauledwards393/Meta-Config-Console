@@ -1,2 +1,2 @@
 var app = angular
-			.module('metaConfigConsole', []);
+			.module('metaConfigConsole', ['ngAnimate']);

@@ -1,0 +1,12 @@
+section {
+  opacity: 1;
+}
+
+section.ng-hide {
+  opacity: 0;
+}
+
+section.ng-hide-add,
+section.ng-hide-remove {
+  @include transition(all 0.3s ease);
+}
