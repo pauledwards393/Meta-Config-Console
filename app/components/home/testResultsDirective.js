@@ -5,9 +5,7 @@ angular
     return {
       restrict: 'E',
       scope: {
-        results: '=',
-        title: '@',
-        fn: '&'
+        api: '='
       },
       templateUrl: 'app/components/home/testResults.html'
     }

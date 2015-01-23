@@ -3,21 +3,17 @@ angular
 	.module('metaConfigConsole')
 	.controller('HomeController', ['$scope', 'advertiserFactory', function($scope, advertiserFactory) {
 
-		var TestCollection = function(apiCalls) {
+		var TestCollection = function(title, apiCalls, testRuns) {
 
 			var self = this;
 
-			var init = function() {
-				self.tests =
-					Object.keys(apiCalls).map(function(element) {
-						return {
-							api: apiCalls[element]
-						}
-					});
-				self.duration = [];
-			}
-
-			init();
+			self.duration = [];
+			self.testRuns = testRuns;
+			self.tests =
+				Object.keys(apiCalls).map(function(element) {
+					return { api: apiCalls[element] }
+				});
+			self.title = title;
 		};
 
 		TestCollection.prototype = {
@@ -37,7 +33,7 @@ angular
 				});
 			},
 
-			runTestsNTimes: function(n) {
+			runTestsNTimes: function() {
 
 				var self = this;
 
@@ -70,7 +66,7 @@ angular
 									performTest(index);
 								else {
 
-									// Update duration
+									// Update overall duration collection
 									self.duration.push(self.tests.reduce(function(a, b) {
 										return {
 											duration: a.duration + b.duration
@@ -79,7 +75,7 @@ angular
 
 									runCounter++;
 
-									if (runCounter < n)
+									if (runCounter < self.testRuns)
 										performAllTests();
 								}
 							})
@@ -95,19 +91,10 @@ angular
 			}
 		};
 
+		var testRuns = 5;
 		var home = this;
 
-		home.testRuns = 5;
-		home.nodejs = home.csharp = {};
-
-		home.runNodejsTests = function() {
-			home.nodejs = new TestCollection(advertiserFactory.nodejs);
-			home.nodejs.runTestsNTimes(home.testRuns);
-		};
-
-		home.runCSharpTests = function() {
-			home.csharp = new TestCollection(advertiserFactory.csharp);
-			home.csharp.runTestsNTimes(home.testRuns);
-		};
+		home.nodejs = new TestCollection('node.js', advertiserFactory.nodejs, testRuns);
+		home.csharp = new TestCollection('C#', advertiserFactory.csharp, testRuns);
 
 	}]);

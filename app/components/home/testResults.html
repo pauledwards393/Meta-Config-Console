@@ -1,9 +1,9 @@
 <div class="small-6 columns">
 
-  <h2>{{ title }}</h2>
-  <a href="" class="button small" ng-click="fn()">Run tests</a>
+  <h2>{{ api.title }}</h2>
+  <a href="" class="button small" ng-click="api.runTestsNTimes()">Run tests</a>
 
-  <section ng-show="results.duration.length > 0">
+  <section ng-show="api.duration.length > 0">
     <h3>Overall</h3>
 
     <table>
@@ -12,7 +12,7 @@
         <th>Duration</th>
       </thead>
       <tbody>
-        <tr ng-repeat="duration in results.duration">
+        <tr ng-repeat="duration in api.duration">
           <td>{{ $index + 1 }}</td>
           <td>{{ duration.duration | number: 2 }}s</td>
         </tr>
@@ -21,20 +21,20 @@
 
   </section>
 
-  <section ng-show="results.tests[0].value">
+  <section ng-show="api.tests[0].value">
     <h3>Test 1: <small>Count of all advertisers</small></h3>
 
     <p>
       <span class="label">Advertiser count</span>
-      {{ results.tests[0].value }}
+      {{ api.tests[0].value }}
     </p>
     <p>
       <span class="label">Test duration</span>
-      {{ results.tests[0].duration | number: 2 }}s
+      {{ api.tests[0].duration | number: 2 }}s
     </p>
   </section>
 
-  <section ng-show="results.tests[1].value">
+  <section ng-show="api.tests[1].value">
     <h3>Test 2: <small>Advertisers with 'Florida' inventories</small></h3>
 
     <table>
@@ -43,7 +43,7 @@
         <th>Name</th>
       </thead>
       <tbody>
-        <tr ng-repeat="advertiser in results.tests[1].value">
+        <tr ng-repeat="advertiser in api.tests[1].value">
           <td>{{ advertiser.id }}</td>
           <td>{{ advertiser.name }}</td>
         </tr>
@@ -52,11 +52,11 @@
 
     <p>
       <span class="label">Test duration</span>
-      {{ results.tests[1].duration | number: 2 }}s
+      {{ api.tests[1].duration | number: 2 }}s
     </p>
   </section>
 
-  <section ng-show="results.tests[2].value">
+  <section ng-show="api.tests[2].value">
     <h3>Test 3: <small>Every 50th advertiser with brand names</small></h3>
 
     <table>
@@ -65,7 +65,7 @@
         <th>Brand</th>
       </thead>
       <tbody>
-        <tr ng-repeat="advertiser in results.tests[2].value">
+        <tr ng-repeat="advertiser in api.tests[2].value">
           <td>{{ advertiser.advertiser }}</td>
           <td>{{ advertiser.brand }}</td>
         </tr>
@@ -74,7 +74,7 @@
 
     <p>
       <span class="label">Test duration</span>
-      {{ results.tests[2].duration | number: 2 }}s
+      {{ api.tests[2].duration | number: 2 }}s
     </p>
   </section>
 
