@@ -3,10 +3,6 @@ angular
 	.module('metaConfigConsole')
 	.controller('HomeController', ['$scope', 'advertiserFactory', function($scope, advertiserFactory) {
 
-		var testRuns = 5;
-
-		$scope.nodejs = $scope.csharp = {};
-
 		var TestCollection = function(apiCalls) {
 
 			var self = this;
@@ -99,14 +95,19 @@ angular
 			}
 		};
 
-		$scope.runNodejsTests = function() {
-			$scope.nodejs = new TestCollection(advertiserFactory.nodejs);
-			$scope.nodejs.runTestsNTimes(testRuns);
+		var home = this;
+
+		home.testRuns = 5;
+		home.nodejs = home.csharp = {};
+
+		home.runNodejsTests = function() {
+			home.nodejs = new TestCollection(advertiserFactory.nodejs);
+			home.nodejs.runTestsNTimes(home.testRuns);
 		};
 
-		$scope.runCSharpTests = function() {
-			$scope.csharp = new TestCollection(advertiserFactory.csharp);
-			$scope.csharp.runTestsNTimes(testRuns);
+		home.runCSharpTests = function() {
+			home.csharp = new TestCollection(advertiserFactory.csharp);
+			home.csharp.runTestsNTimes(home.testRuns);
 		};
 
 	}]);

@@ -3,11 +3,11 @@
 	<title>Meta Configuration Console</title>
 	<link rel="stylesheet" type="text/css" href="/public/main.css" />
 </head>
-<body ng-app="metaConfigConsole" ng-controller="HomeController">
+<body ng-app="metaConfigConsole" ng-controller="HomeController as home">
 
 	<div class="row">
-		<test-results results="nodejs" title="node.js" fn="runNodejsTests()"></test-results>
-		<test-results results="csharp" title="C#" fn="runCSharpTests()"></test-results>
+		<test-results results="home.nodejs" title="node.js" fn="home.runNodejsTests()"></test-results>
+		<test-results results="home.csharp" title="C#" fn="home.runCSharpTests()"></test-results>
 	</div>
 
 	<script src="/public/main.js"></script>
