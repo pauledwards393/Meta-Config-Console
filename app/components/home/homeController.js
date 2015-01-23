@@ -7,7 +7,6 @@ angular
 
 			var self = this;
 
-			self.duration = [];
 			self.testRuns = testRuns;
 			self.tests =
 				Object.keys(apiCalls).map(function(element) {
@@ -67,11 +66,14 @@ angular
 								else {
 
 									// Update overall duration collection
-									self.duration.push(self.tests.reduce(function(a, b) {
-										return {
-											duration: a.duration + b.duration
-										}
-									}));
+									if (self.tests.length === 1)
+										self.duration.push({ duration: test.duration });
+									else
+										self.duration.push(self.tests.reduce(function(a, b) {
+											return {
+												duration: a.duration + b.duration
+											}
+										}));
 
 									runCounter++;
 
@@ -87,6 +89,7 @@ angular
 					performTest(0);
 				}
 
+				self.duration = [];
 				performAllTests();
 			}
 		};
